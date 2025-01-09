@@ -5,14 +5,66 @@
 }
 
 body {
-  background-color: #4A5260;
-  color: #E5E4E2;
+  background-color: #4a5260;
+  color: #e5e4e2;
   font-family: Arial, sans-serif;
 }
 
+.list-panel {
+  background-color: #c0c0c0;
+  border-right: 2px solid #a0a0a0;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.list-item-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.list-item {
+  padding: 15px;
+  margin: 0;
+  background-color: #d0d0d0;
+  border: 1px solid #a0a0a0;
+  text-align: center;
+}
+.list-item:not(:last-child) {
+  border-bottom: none;
+}
+.list-item:focus {
+  background-color: #a0a0a0;
+  color: white;
+  outline: none;
+}
+
+.card-panel {
+  background-color: #c0c0c0;
+  padding: 20px;
+}
+
+.card {
+  margin: 10px 20px;
+  background-color: #d0d0d0;
+  border-color: #a0a0a0;
+  width: calc(100% - 40px);
+}
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .header {
-  background-color: #1F2232;
-  color: #E5E4E2;
+  background-color: #1f2232;
+  color: #e5e4e2;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
@@ -21,7 +73,7 @@ body {
 
 .logo .logo-link {
   text-decoration: none;
-  color: #E5E4E2;
+  color: #e5e4e2;
 }
 .logo h1 {
   font-size: 24px;
@@ -37,7 +89,7 @@ body {
   margin-left: 20px;
 }
 .nav .nav-list a {
-  color: #E5E4E2;
+  color: #e5e4e2;
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s ease;

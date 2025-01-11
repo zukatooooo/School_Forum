@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 * {
   margin: 0;
@@ -68,15 +69,92 @@ body {
   }
 }
 
-.header {
-  background-color: $navbar-color;
-  color: $text-color;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+header {
+    background-color: $navbar-color;
+    color: $text-color;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+  
+    .nav {
+      width: 500px;
+  
+      ul {
+        @include go-flex(row, wrap, space-between, center);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex; // Align items in a row
+        gap: 10px; // Space between items (10px)
+  
+        li {
+          a {
+            text-decoration: none; // Remove underline
+            color: $text-color; // Text color from variable
+            padding: 5px 10px; // Optional padding for clickability
+            display: block; // Make anchor a block-level element
+  
+            &:hover {
+              color: darken($text-color, 10%); // Optional: Darken on hover
+            }
+          }
+        }
+      }
+  
+      @media (max-width: 768px) {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: $navbar-color;
+        width: 100%;
+        overflow: hidden;
+        max-height: 0; // Initially hidden
+        transition: max-height 0.3s ease-out; // Smooth transition
+        padding: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+        ul {
+          @include go-flex(column, nowrap, center, flex-start);
+          gap: 10px;
+          padding: 10px;
+        }
+      }
+    }
+  
+    .burger-icon {
+      @include go-flex(column, nowrap, space-between, center);
+      display: none; // Initially hidden for larger screens
+      width: 40px;
+      height: 40px;
+      padding: 5px;
+      cursor: pointer;
+  
+      span {
+        display: block;
+        width: 100%;
+        height: 5px;
+        background-color: $text-color;
+        border-radius: 5px;
+      }
+  
+      @media (max-width: 768px) {
+        display: flex; // Show burger icon for smaller screens
+      }
+    }
+  
+    .menu-toggle {
+      display: none; // Hide the checkbox
+    }
+  
+    // When the menu-toggle checkbox is checked, show the dropdown
+    .menu-toggle:checked ~ .nav {
+      max-height: 300px; // Adjust based on the dropdown content height
+    }
+  }
+  
 .logo {
   .logo-link {
     text-decoration: none;
@@ -111,3 +189,5 @@ body {
     color: white;
   }
 }
+
+@import "media";

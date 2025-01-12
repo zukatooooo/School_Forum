@@ -76,10 +76,47 @@ header {
   align-items: center;
   position: relative;
   z-index: 1000;
+  /* Container for centering the search bar */
+  /* Search form styling */
+  /* Search input field */
+  /* Search button styling */
   /* Burger Icon (Mobile) */
   /* Checkbox for toggling the menu visibility */
   /* When the menu-toggle checkbox is checked, the navigation shows */
   /* Optional: Change burger icon color when clicked */
+}
+header .search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .search-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+header .search-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+  font-size: 16px;
+  outline: none; /* Remove outline on focus */
+}
+header .search-button {
+  background-color: #151722;
+  color: #e5e4e2;
+  border: none;
+  padding: 10px;
+  border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+  cursor: pointer;
+  font-size: 16px;
+}
+header .search-button:hover {
+  background-color: #0b0d13;
+}
+header .search-input:focus {
+  border: 2px solid #0056b3; /* Blue border when input is focused */
 }
 header .nav {
   width: 500px;
@@ -105,7 +142,7 @@ header .nav ul li a {
 header .nav ul li a:hover {
   color: #cdcbc7;
 }
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   header .nav {
     position: absolute;
     top: 100%;
@@ -117,6 +154,14 @@ header .nav ul li a:hover {
     transition: max-height 0.3s ease-out;
     padding: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14;
+  }
+  header .nav .search-input {
+    font-size: 14px; /* Slightly smaller text on mobile */
+  }
+  header .nav .search-button {
+    font-size: 14px;
+    padding: 8px 16px;
   }
   header .nav ul {
     display: flex;
@@ -134,7 +179,7 @@ header .nav.open {
 header .burger-icon {
   display: none; /* Hidden by default */
 }
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   header .burger-icon {
     display: flex;
     flex-direction: column;
@@ -251,6 +296,43 @@ header .menu-toggle:checked + .burger-icon span {
   }
 }
 
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #a0a0a0;
+  border-radius: 10px;
+  background-color: #d0d0d0;
+  color: #212529;
+}
+.login-container .btn {
+  background-color: #1f2232;
+  color: #e5e4e2;
+}
+
+.banner-container {
+  width: 100%; /* Make the container span the full width */
+  height: 100%; /* Set the height to 60% of the viewport height, adjust as needed */
+  overflow: hidden; /* Prevent image overflow */
+  position: relative;
+}
+
+/* Banner image styles */
+.banner-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* Ensures the image covers the container without stretching or distorting */
+  -o-object-position: center;
+     object-position: center; /* Centers the image within the container */
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
+  .banner-container {
+    height: 40vh; /* Adjust the banner height on smaller screens */
+  }
+}
 @media (max-width: 1200px) {
   main {
     width: 100%;

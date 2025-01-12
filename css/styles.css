@@ -5,7 +5,6 @@
 }
 
 body {
-  background-color: #4a5260;
   color: #e5e4e2;
   font-family: Arial, sans-serif;
 }
@@ -13,12 +12,18 @@ body {
 .list-panel {
   background-color: #c0c0c0;
   border-right: 2px solid #a0a0a0;
+  border-left: 2px solid #a0a0a0;
   height: 100vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
+}
+
+.titles {
+  text-align: left;
+  width: 100%;
 }
 
 .list-item-container {
@@ -71,6 +76,10 @@ header {
   align-items: center;
   position: relative;
   z-index: 1000;
+  /* Burger Icon (Mobile) */
+  /* Checkbox for toggling the menu visibility */
+  /* When the menu-toggle checkbox is checked, the navigation shows */
+  /* Optional: Change burger icon color when clicked */
 }
 header .nav {
   width: 500px;
@@ -119,35 +128,38 @@ header .nav ul li a:hover {
     padding: 10px;
   }
 }
-header .burger-icon {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  display: none;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  cursor: pointer;
+header .nav.open {
+  max-height: 300px; /* Increased max-height to ensure full menu visibility */
 }
-header .burger-icon span {
-  display: block;
-  width: 100%;
-  height: 5px;
-  background-color: #e5e4e2;
-  border-radius: 5px;
+header .burger-icon {
+  display: none; /* Hidden by default */
 }
 @media (max-width: 768px) {
   header .burger-icon {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  header .burger-icon span {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #e5e4e2;
+    border-radius: 5px;
   }
 }
 header .menu-toggle {
-  display: none;
+  display: none; /* Hide checkbox, we'll use the label to toggle it */
 }
 header .menu-toggle:checked ~ .nav {
-  max-height: 300px;
+  max-height: 300px; /* Ensure the menu opens fully */
+}
+header .menu-toggle:checked + .burger-icon span {
+  background-color: #fff; /* Change burger icon color when clicked */
 }
 
 .logo .logo-link {
@@ -177,25 +189,65 @@ header .menu-toggle:checked ~ .nav {
   color: white;
 }
 
-@media (max-width: 480px) {
-  header {
-    padding: 10px 25px;
-    justify-content: space-between;
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+.footer .footer-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.footer .footer-container .footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.footer .footer-container .footer-section p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.footer .footer-container .footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+.footer .footer-container .footer-section ul li {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.footer .footer-container .footer-section ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer .footer-container .footer-section ul li a:hover {
+  color: #f0a500;
+}
+.footer .footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #222;
+  font-size: 14px;
+}
+.footer .footer-bottom p {
+  margin: 0;
+  color: #ccc;
+}
+@media (max-width: 768px) {
+  .footer .footer-container {
+    grid-template-columns: 1fr 1fr;
   }
 }
-@media (max-width: 600px) {
-  header .nav {
-    width: 400px;
-  }
-}
 @media (max-width: 480px) {
-  header .nav {
-    display: none;
+  .footer .footer-container {
+    grid-template-columns: 1fr;
   }
-}
-@media (max-width: 480px) {
-  header .burger-icon {
-    display: flex;
+  .footer .footer-bottom {
+    font-size: 12px;
+    padding: 10px;
   }
 }
 

@@ -8,7 +8,6 @@
 }
 
 body {
-  background-color: $background-color;
   color: $text-color;
   font-family: Arial, sans-serif;
 }
@@ -16,12 +15,18 @@ body {
 .list-panel {
   background-color: $panel-bg-color;
   border-right: 2px solid $border-color;
+  border-left: 2px solid $border-color;
   height: 100vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
+}
+
+.titles {
+  text-align: left;
+  width: 100%;
 }
 
 .list-item-container {
@@ -70,68 +75,77 @@ body {
 }
 
 header {
-    background-color: $navbar-color;
-    color: $text-color;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1000;
-  
-    .nav {
-      width: 500px;
-  
-      ul {
-        @include go-flex(row, wrap, space-between, center);
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex; // Align items in a row
-        gap: 10px; // Space between items (10px)
-  
-        li {
-          a {
-            text-decoration: none; // Remove underline
-            color: $text-color; // Text color from variable
-            padding: 5px 10px; // Optional padding for clickability
-            display: block; // Make anchor a block-level element
-  
-            &:hover {
-              color: darken($text-color, 10%); // Optional: Darken on hover
-            }
+  background-color: $navbar-color;
+  color: $text-color;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1000;
+
+  .nav {
+    width: 500px;
+
+    ul {
+      @include go-flex(row, wrap, space-between, center);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 10px;
+
+      li {
+        a {
+          text-decoration: none;
+          color: $text-color;
+          padding: 5px 10px;
+          display: block;
+
+          &:hover {
+            color: darken($text-color, 10%);
           }
         }
       }
-  
-      @media (max-width: 768px) {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: $navbar-color;
-        width: 100%;
-        overflow: hidden;
-        max-height: 0; // Initially hidden
-        transition: max-height 0.3s ease-out; // Smooth transition
-        padding: 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
-        ul {
-          @include go-flex(column, nowrap, center, flex-start);
-          gap: 10px;
-          padding: 10px;
-        }
+    }
+
+    @media (max-width: 768px) {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: $navbar-color;
+      width: 100%;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease-out;
+      padding: 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      ul {
+        @include go-flex(column, nowrap, center, flex-start);
+        gap: 10px;
+        padding: 10px;
       }
     }
-  
-    .burger-icon {
-      @include go-flex(column, nowrap, space-between, center);
-      display: none; // Initially hidden for larger screens
+
+    &.open {
+      max-height: 300px; /* Increased max-height to ensure full menu visibility */
+    }
+  }
+
+  /* Burger Icon (Mobile) */
+  .burger-icon {
+    display: none; /* Hidden by default */
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       width: 40px;
       height: 40px;
       padding: 5px;
       cursor: pointer;
-  
+
       span {
         display: block;
         width: 100%;
@@ -139,22 +153,25 @@ header {
         background-color: $text-color;
         border-radius: 5px;
       }
-  
-      @media (max-width: 768px) {
-        display: flex; // Show burger icon for smaller screens
-      }
-    }
-  
-    .menu-toggle {
-      display: none; // Hide the checkbox
-    }
-  
-    // When the menu-toggle checkbox is checked, show the dropdown
-    .menu-toggle:checked ~ .nav {
-      max-height: 300px; // Adjust based on the dropdown content height
     }
   }
-  
+
+  /* Checkbox for toggling the menu visibility */
+  .menu-toggle {
+    display: none; /* Hide checkbox, we'll use the label to toggle it */
+  }
+
+  /* When the menu-toggle checkbox is checked, the navigation shows */
+  .menu-toggle:checked ~ .nav {
+    max-height: 300px; /* Ensure the menu opens fully */
+  }
+
+  /* Optional: Change burger icon color when clicked */
+  .menu-toggle:checked + .burger-icon span {
+    background-color: #fff; /* Change burger icon color when clicked */
+  }
+}
+
 .logo {
   .logo-link {
     text-decoration: none;
@@ -187,6 +204,82 @@ header {
 
   .nav-list a:hover {
     color: white;
+  }
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    .footer-section {
+      h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+          font-size: 14px;
+          margin-bottom: 8px;
+
+          a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: #f0a500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #222;
+    font-size: 14px;
+
+    p {
+      margin: 0;
+      color: #ccc;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+      font-size: 12px;
+      padding: 10px;
+    }
   }
 }
 
